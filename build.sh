@@ -6,7 +6,7 @@ CERT_ID="${DEV_NAME//\DEVELOPER_NAME = } (${DEV_TEAM//\DEVELOPMENT_TEAM = })"
 mkdir -p build
 
 
-xcrun xcodebuild -configuration Release -target "Whole Driver" -xcconfig "DeveloperSettings.xcconfig" MACOSX_DEPLOYMENT_TARGET=10.11 SDKROOT=macosx10.14 OTHER_CODE_SIGN_FLAGS="--timestamp --options=runtime"
+xcrun xcodebuild -configuration Release -target "Whole Driver" -xcconfig "DeveloperSettings.xcconfig" MACOSX_DEPLOYMENT_TARGET=10.11 -sdk macosx12.1 OTHER_CODE_SIGN_FLAGS="--timestamp --options=runtime"
 if [ $? -ne 0 ]
 	then
 		echo "******** BUILD FAILED ********"
@@ -14,7 +14,7 @@ if [ $? -ne 0 ]
 fi
 
 pushd Install360Controller
-packagesbuild -v Install360Controller.pkgproj --identity "Developer ID Installer: ""${CERT_ID}"
+packagesbuild -v Install360Controller.pkgproj
 if [ $? -ne 0 ]
 	then
 		echo "******** INSTALLER BUILD FAILED ********"
